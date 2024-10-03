@@ -20,7 +20,7 @@ hamburger.addEventListener('click', function () {
 });
 
 // JavaScript untuk pergantian background
-const heroSection = document.querySelector('.hero-bg');
+const heroSection = document.querySelector('.hero');
 const backgrounds = ['bg-hero-1', 'bg-hero-2', 'bg-hero-3'];
 let currentBackground = 0;
 
