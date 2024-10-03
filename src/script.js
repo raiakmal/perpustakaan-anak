@@ -28,4 +28,4 @@ setInterval(() => {
   heroSection.classList.remove(backgrounds[currentBackground]);
   currentBackground = (currentBackground + 1) % backgrounds.length;
   heroSection.classList.add(backgrounds[currentBackground]);
-}, 5000); // Ganti setiap 5 detik
+}, 5000);
