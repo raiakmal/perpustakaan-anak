@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 
-const Tentang = () => {
+const Tentang = ({ id }) => {
   return (
-    <section id="tentang" className="py-16">
+    <section id={id} className="py-16">
       <div className="container">
         <div className="flex flex-wrap">
           <div className="w-full px-4 mb-10 lg:w-1/2">
@@ -50,7 +50,7 @@ const Tentang = () => {
             </div>
           </div>
           <div className="w-full px-4 lg:w-1/2">
-            <Image src="/assets/tentang/tentang.jpg" alt="Tentang Kami" layout="responsive" width={700} height={500} className="object-cover rounded-lg shadow-lg" />
+            <Image src="/assets/tentang/tentang.jpg" alt="Tentang Kami" width={500} height={300} className="object-cover rounded-lg shadow-lg" />
           </div>
         </div>
       </div>

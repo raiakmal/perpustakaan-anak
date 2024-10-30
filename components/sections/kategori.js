@@ -1,8 +1,8 @@
 'use clien';
 
-const Kategori = () => {
+const Kategori = ({ id }) => {
   return (
-    <section id="kategori" className="py-16 shadow-xl">
+    <section id={id} className="py-16 shadow-xl">
       <div className="container">
         <div className="w-full px-4">
           <div className="max-w-full mx-auto text-center mb-16">

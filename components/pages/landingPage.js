@@ -11,9 +11,9 @@ const LandingPage = () => {
     <div>
       <Navbar />
       <Hero />
-      <Tentang />
-      <Kategori />
-      <Layanan />
+      <Tentang id="tentang" />
+      <Kategori id="kategori" />
+      <Layanan id="layanan" />
       <Klien />
       <Footer />
     </div>

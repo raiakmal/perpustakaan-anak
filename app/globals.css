@@ -35,7 +35,3 @@ body {
   background-size: cover;
   background-position: center;
 }
-
-.img-tentang {
-  background-image: url('../public/assets/tentang/tentang.jpg');
-}

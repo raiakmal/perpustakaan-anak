@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 
-const Layanan = () => {
+const Layanan = ({ id }) => {
   return (
-    <section id="layanan" className="py-16">
+    <section id={id} className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h4 className="font-bold uppercase text-primary text-lg mb-3">Layanan</h4>
