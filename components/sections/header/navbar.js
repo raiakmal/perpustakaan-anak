@@ -1,9 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 const Navbar = () => {
+  const router = useRouter();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -11,12 +15,9 @@ const Navbar = () => {
   // Handle Scroll Event
   const handleScroll = () => {
     const header = document.querySelector('header');
-    const fixedNav = header.offsetTop;
-
-    if (window.pageYOffset > fixedNav) {
-      setIsFixed(true);
-    } else {
-      setIsFixed(false);
+    if (header) {
+      const fixedNav = header.getBoundingClientRect().top;
+      setIsFixed(window.pageYOffset > fixedNav);
     }
   };
 
@@ -32,15 +33,10 @@ const Navbar = () => {
   const handleSmoothScroll = (e, targetId) => {
     e.preventDefault();
     const target = document.getElementById(targetId);
-
     if (target) {
       const yOffset = -50;
       const yPosition = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-      window.scrollTo({
-        top: yPosition,
-        behavior: 'smooth',
-      });
+      window.scrollTo({ top: yPosition, behavior: 'smooth' });
     }
   };
 
@@ -54,19 +50,49 @@ const Navbar = () => {
     setIsLoginOpen(!isLoginOpen);
   };
 
+  // Handle Login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      // Pastikan respons berupa JSON
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Jika login berhasil
+      alert(data.message);
+      setIsLoginOpen(false);
+      router.push('/dashboard'); // Redirect ke halaman dashboard setelah login berhasil
+    } catch (error) {
+      console.error('Login error:', error.message);
+      alert(`Terjadi kesalahan: ${error.message}`);
+    }
+  };
+
   return (
     <div>
       <header className={`bg-transparent absolute top-0 left-0 w-full flex items-center z-20 ${isFixed ? 'navbar-fixed' : ''}`}>
         <div className="container">
           <div className="flex items-center justify-between relative">
             <div className="px-4">
-              <Link href="#" className="font-bold text-lg text-primary block py-6">
+              <Link href="/" className="font-bold text-lg text-primary block py-6">
                 Awokwik
               </Link>
             </div>
             <div className="flex items-center px-4">
               {/* Hamburger Button */}
-              <button id="hamburger" name="hamburger" type="button" className={`block lg:hidden ${isMenuOpen ? 'hamburger-active' : ''}`} onClick={handleToggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle navigation">
+              <button id="hamburger" type="button" className={`block lg:hidden ${isMenuOpen ? 'hamburger-active' : ''}`} onClick={handleToggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle navigation">
                 <span className={`hamburger-line ${isMenuOpen ? 'rotate-45' : ''} origin-top-left transition duration-300 ease-in-out`}></span>
                 <span className={`hamburger-line ${isMenuOpen ? 'scale-0' : ''} transition duration-300 ease-in-out`}></span>
                 <span className={`hamburger-line ${isMenuOpen ? '-rotate-45' : ''} origin-bottom-left transition duration-300 ease-in-out`}></span>
@@ -79,7 +105,7 @@ const Navbar = () => {
               >
                 <ul className="block lg:flex">
                   <li className="group">
-                    <Link href="#" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
+                    <Link href="/" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
                       Beranda
                     </Link>
                   </li>
@@ -99,7 +125,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="group">
-                    <Link href="#" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
+                    <Link href="#kontak" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
                       Kontak
                     </Link>
                   </li>
@@ -122,24 +148,37 @@ const Navbar = () => {
       {isLoginOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-dark bg-opacity-50 z-30">
           <div className="relative bg-white p-8 rounded-lg shadow-lg w-[400px]">
-            {/* Button Close */}
             <button className="absolute -top-4 -right-4 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center focus:outline-none" onClick={handleToggleLogin} aria-label="Close">
               <i className="ri-close-line text-lg"></i>
             </button>
 
-            {/* Title */}
             <h2 className="text-2xl font-bold text-center text-primary">Awokwik</h2>
             <h2 className="text-2xl font-bold text-center text-dark mb-6">LOGIN</h2>
 
-            {/* Login Form */}
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="mb-4 relative">
                 <i className="ri-user-line absolute left-3 top-3 text-gray-400 text-xl"></i>
-                <input type="text" id="username" placeholder="Username" className="border border-gray-300 rounded w-full p-3 pl-10 focus:border-primary focus:outline-none" required />
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Username"
+                  className="border border-gray-300 rounded w-full p-3 pl-10 focus:border-primary focus:outline-none"
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </div>
               <div className="mb-6 relative">
                 <i className="ri-lock-line absolute left-3 top-3 text-gray-400 text-xl"></i>
-                <input type="password" id="password" placeholder="Password" className="border border-gray-300 rounded w-full p-3 pl-10 focus:border-primary focus:outline-none" required />
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  className="border border-gray-300 rounded w-full p-3 pl-10 focus:border-primary focus:outline-none"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className="flex justify-center">
                 <button
