@@ -35,3 +35,8 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: none;
+}

@@ -1,6 +1,7 @@
-import Head from 'next/head';
 import { Poppins } from 'next/font/google';
 import './globals.css';
+import Head from 'next/head';
+import Link from 'next/link';
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -9,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'Perpustakaan Anak',
+  title: 'Awokwik',
   description: 'Perpustakaan Anak',
 };
 
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+        <Link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
       </Head>
       <body className={`${poppins.variable}antialiased`}>{children}</body>
     </html>

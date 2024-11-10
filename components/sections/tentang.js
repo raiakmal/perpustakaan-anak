@@ -10,13 +10,10 @@ const Tentang = ({ id }) => {
           <div className="w-full px-4 mb-10 lg:w-1/2">
             <h4 className="font-bold uppercase text-primary text-lg mb-3">Tentang Kami</h4>
             <h2 className="font-bold text-dark text-xl mb-3 lg:text-3xl">Apa Itu Awokwik?</h2>
-            <p className="text-base text-slate max-w-xl mb-6 lg:text-lg">
+            <p className="text-base text-slate max-w-xl mb-4 lg:text-lg">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti aspernatur, ipsum, ex commodi fugiat corporis aperiam cum inventore ducimus et, unde eveniet eligendi ut atque iusto quod laudantium distinctio placeat.
             </p>
-            <a href="#" className="font-medium text-md text-white bg-primary py-3 px-6 rounded-lg mb-6 hover:bg-secondary">
-              Tantang Kami
-            </a>
-            <h3 className="font-semibold text-dark text-lg mb-4 lg:text-2xl pt-12">Ikuti dan Hubungi Kami</h3>
+            <h3 className="font-semibold text-dark text-lg mb-4 lg:text-2xl pt-8">Ikuti dan Hubungi Kami</h3>
             <p className="text-base text-slate max-w-xl mb-4 lg:text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, a.</p>
             <div className="flex items-center">
               {/* Whatsapp */}
@@ -49,8 +46,8 @@ const Tentang = ({ id }) => {
               </a>
             </div>
           </div>
-          <div className="w-full px-4 lg:w-1/2">
-            <Image src="/assets/tentang/tentang.jpg" alt="Tentang Kami" width={500} height={300} className="object-cover rounded-lg shadow-lg" />
+          <div className="w-full flex justify-center px-4 lg:w-1/2">
+            <Image src="/assets/tentang/tentang.jpg" alt="Tentang Kami" width={400} height={200} className="object-cover rounded-lg shadow-lg" />
           </div>
         </div>
       </div>

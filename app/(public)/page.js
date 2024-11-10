@@ -1,5 +1,4 @@
-import './globals.css';
-import LandingPage from '@/components/pages/landingPage';
+import LandingPage from '@/app/(public)/pages/landingPage';
 
 export default function Home() {
   return (
