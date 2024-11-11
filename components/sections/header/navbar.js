@@ -1,16 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { LoginLink } from '@kinde-oss/kinde-auth-nextjs/components';
 
 const Navbar = () => {
-  const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   // Handle Scroll Event
   const handleScroll = () => {
@@ -43,41 +39,6 @@ const Navbar = () => {
   // Handle Hamburger Menu Toggle
   const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Handle Login Form Toggle
-  const handleToggleLogin = () => {
-    setIsLoginOpen(!isLoginOpen);
-  };
-
-  // Handle Login
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      // Pastikan respons berupa JSON
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      // Jika login berhasil
-      alert(data.message);
-      setIsLoginOpen(false);
-      router.push('/dashboard'); // Redirect ke halaman dashboard setelah login berhasil
-    } catch (error) {
-      console.error('Login error:', error.message);
-      alert(`Terjadi kesalahan: ${error.message}`);
-    }
   };
 
   return (
@@ -130,11 +91,8 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="group">
-                    <button
-                      onClick={handleToggleLogin}
-                      className="font-medium text-md text-white bg-primary py-2 px-4 ml-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out"
-                    >
-                      Login
+                    <button className="font-medium text-md text-white bg-primary py-2 px-4 ml-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out">
+                      <LoginLink>Masuk</LoginLink>
                     </button>
                   </li>
                 </ul>
@@ -143,55 +101,6 @@ const Navbar = () => {
           </div>
         </div>
       </header>
-
-      {/* Form Login Overlay */}
-      {isLoginOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-dark bg-opacity-50 z-30">
-          <div className="relative bg-white p-8 rounded-lg shadow-lg w-[400px]">
-            <button className="absolute -top-4 -right-4 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center focus:outline-none" onClick={handleToggleLogin} aria-label="Close">
-              <i className="ri-close-line text-lg"></i>
-            </button>
-
-            <h2 className="text-2xl font-bold text-center text-primary">Awokwik</h2>
-            <h2 className="text-2xl font-bold text-center text-dark mb-6">LOGIN</h2>
-
-            <form onSubmit={handleLogin}>
-              <div className="mb-4 relative">
-                <i className="ri-user-line absolute left-3 top-3 text-gray-400 text-xl"></i>
-                <input
-                  type="text"
-                  id="username"
-                  placeholder="Username"
-                  className="border border-gray-300 rounded w-full p-3 pl-10 focus:border-primary focus:outline-none"
-                  required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div className="mb-6 relative">
-                <i className="ri-lock-line absolute left-3 top-3 text-gray-400 text-xl"></i>
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  className="border border-gray-300 rounded w-full p-3 pl-10 focus:border-primary focus:outline-none"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="font-medium text-md text-white bg-primary py-3 px-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out"
-                >
-                  Masuk
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

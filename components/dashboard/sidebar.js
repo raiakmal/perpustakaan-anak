@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex items-center px-4">
+    <div className="flex items-center">
       {/* Toggle button for mobile view */}
-      {/* Hamburger Button */}
       <button id="hamburger" name="hamburger" type="button" className={`block md:hidden ${isOpen ? 'hamburger-active' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-label="Toggle navigation">
         <span className={`hamburger-line ${isOpen ? 'rotate-45' : ''} origin-top-left transition duration-300 ease-in-out`}></span>
         <span className={`hamburger-line ${isOpen ? 'scale-0' : ''} transition duration-300 ease-in-out`}></span>
@@ -17,28 +17,35 @@ export default function Sidebar() {
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 md:z-10 w-64 bg-primary text-white transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-200 md:translate-x-0`}>
-        <div className="p-4">
-          <h2 className="font-bold text-2xl">Awokwik</h2>
-        </div>
+      <div className={`fixed inset-y-0 left-0 w-64 h-screen bg-primary text-white z-20 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-200 md:relative md:translate-x-0 md:z-10`}>
         <nav className="space-y-4 p-6">
-          <Link href="#" className="block text-lg">
-            Beranda
+          <div className="flex items-center justify-center">
+            <h2 className="font-bold text-2xl">Awokwik</h2>
+          </div>
+          <Link href="/dashboard" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
+            <i className="ri-home-4-line text-xl"></i>
+            <span>Beranda</span>
           </Link>
-          <Link href="#" className="block text-lg">
-            Buku
+          <Link href="#" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
+            <i className="ri-book-open-line text-xl"></i>
+            <span>Buku</span>
           </Link>
-          <Link href="#" className="block text-lg">
-            Siswa
+          <Link href="#" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
+            <i className="ri-team-line text-xl"></i>
+            <span>Siswa</span>
           </Link>
-          <Link href="#" className="block text-lg">
-            Pustakawan
+          <Link href="#" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
+            <i className="ri-group-line text-xl"></i>
+            <span>Pustakawan</span>
           </Link>
         </nav>
+        <button className="font-medium text-lg text-white py-2 px-4 ml-12 mt-6 rounded-lg border-2 border-white hover:bg-secondary transition-colors duration-300 ease-in-out">
+          <LogoutLink>Logout</LogoutLink>
+        </button>
       </div>
 
       {/* Overlay for mobile view */}
-      {isOpen && <div className="fixed inset-0 bg-black opacity-50 md:hidden" onClick={() => setIsOpen(false)}></div>}
+      {isOpen && <div className="fixed inset-0 bg-black opacity-50 z-10 md:hidden" onClick={() => setIsOpen(false)} aria-hidden="true"></div>}
     </div>
   );
 }
