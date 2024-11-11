@@ -1,3 +1,4 @@
+import Body from '@/components/dashboard/body';
 import Sidebar from '@/components/dashboard/sidebar';
 
 const Page = () => {
@@ -7,7 +8,9 @@ const Page = () => {
       <Sidebar />
 
       {/* Dashboard */}
-      <div className="w-full p-8">Hello Admin!!!</div>
+      <div className="w-full p-2">
+        <Body />
+      </div>
     </div>
   );
 };

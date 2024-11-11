@@ -8,16 +8,28 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex items-center">
+    <div className="relative">
       {/* Toggle button for mobile view */}
-      <button id="hamburger" name="hamburger" type="button" className={`block md:hidden ${isOpen ? 'hamburger-active' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-label="Toggle navigation">
+      <button
+        id="hamburger"
+        name="hamburger"
+        type="button"
+        className={`block md:hidden ${isOpen ? 'hamburger-active' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-label="Toggle navigation"
+        style={{ zIndex: 9999 }} // Ensure the hamburger button is above all other content
+      >
         <span className={`hamburger-line ${isOpen ? 'rotate-45' : ''} origin-top-left transition duration-300 ease-in-out`}></span>
         <span className={`hamburger-line ${isOpen ? 'scale-0' : ''} transition duration-300 ease-in-out`}></span>
         <span className={`hamburger-line ${isOpen ? '-rotate-45' : ''} origin-bottom-left transition duration-300 ease-in-out`}></span>
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 w-64 h-screen bg-primary text-white z-20 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-200 md:relative md:translate-x-0 md:z-10`}>
+      <div
+        className={`fixed inset-y-0 left-0 w-64 h-screen bg-primary text-white z-20 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-200 md:relative md:translate-x-0 md:z-10`}
+        style={{ top: 0 }} // Ensure sidebar stays at the top of the page
+      >
         <nav className="space-y-4 p-6">
           <div className="flex items-center justify-center">
             <h2 className="font-bold text-2xl">Awokwik</h2>
@@ -26,7 +38,7 @@ export default function Sidebar() {
             <i className="ri-home-4-line text-xl"></i>
             <span>Beranda</span>
           </Link>
-          <Link href="#" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
+          <Link href="/dashboard/buku" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
             <i className="ri-book-open-line text-xl"></i>
             <span>Buku</span>
           </Link>

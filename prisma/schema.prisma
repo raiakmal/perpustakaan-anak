@@ -13,9 +13,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String
+model Buku {
+  id         Int      @id @default(autoincrement())
+  judul      String
+  penulis    String
+  penerbit   String
+  tahunTerbit Int
+  isbn       String   @unique
+  stok       Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Siswa {
+  id         Int      @id @default(autoincrement())
+  nama       String
+  nomorInduk String   @unique
+  kelas      String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Pustakawan {
+  id         Int      @id @default(autoincrement())
+  nama       String
+  email      String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
