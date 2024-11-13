@@ -6,23 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "studio": "prisma studio",
+    "dev:both": "concurrently \"npm run dev\" \"npm run studio\""
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.4.6",
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "formidable": "^3.5.2",
     "next": "15.0.1",
+    "next-cloudinary": "^6.16.0",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "remixicon": "^4.5.0",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "concurrently": "^9.1.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.1",
     "postcss": "^8",
     "prisma": "^5.22.0",
+    "start-server-and-test": "^2.0.8",
     "tailwindcss": "^3.4.1"
   }
 }
