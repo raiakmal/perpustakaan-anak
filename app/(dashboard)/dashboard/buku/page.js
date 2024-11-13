@@ -1,33 +1,13 @@
-'use client';
-
 import Sidebar from '@/components/dashboard/sidebar';
-import { useEffect, useState } from 'react';
+import BukuBaru from '@/components/dashboard/buku/baru';
+import KoleksiBuku from '@/components/dashboard/buku/koleksi';
 
 export default function Home() {
-  const [buku, setBuku] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/buku')
-      .then((res) => res.json())
-      .then((data) => setBuku(data));
-  }, []);
-
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Dashboard */}
-      <div className="w-full p-8">
-        <h1>Daftar Buku</h1>
-        <ul>
-          {buku.map((b) => (
-            <li key={b.id}>
-              {b.judul} - {b.penulis}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div>
+      <h1 className="font-semibold text-dark text-xl mt-1 mb-6 lg:text-2xl">Daftar Buku</h1>
+      <BukuBaru />
+      <KoleksiBuku />
     </div>
   );
 }
