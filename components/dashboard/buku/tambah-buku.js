@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function TambahBuku() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     judul: '',
     penulis: '',
@@ -27,8 +29,6 @@ export default function TambahBuku() {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    console.log('File yang diunggah:', file);
-
     const formDataFile = new FormData();
     formDataFile.append('file', file);
 
@@ -43,7 +43,6 @@ export default function TambahBuku() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Error response:', errorData);
         throw new Error(errorData.error || 'Gagal mengunggah gambar');
       }
 
@@ -53,7 +52,6 @@ export default function TambahBuku() {
         imagePath: data.url,
       }));
     } catch (error) {
-      console.error('Terjadi kesalahan saat mengunggah gambar:', error.message);
       setUploadError('Gagal mengunggah gambar. Silakan coba lagi.');
     } finally {
       setIsLoading(false);
@@ -96,37 +94,19 @@ export default function TambahBuku() {
         }),
       });
 
-      const text = await response.text();
-      console.log('Raw response text:', text);
-
-      const data = text ? JSON.parse(text) : {};
-
       if (!response.ok) {
+        const data = await response.json();
         throw new Error(data.error || 'Gagal menambahkan buku');
       }
 
-      console.log('Buku berhasil ditambahkan:', data);
-
-      setFormData({
-        judul: '',
-        penulis: '',
-        penerbit: '',
-        tahunTerbit: '',
-        kategori: '',
-        stok: 0,
-        imagePath: null,
-      });
       setSuccessMessage('Buku berhasil ditambahkan!');
 
-      // Reload halaman setelah sukses menambahkan buku
       setTimeout(() => {
-        window.location.reload();
-      }, 2000); // Delay untuk memastikan pesan sukses ditampilkan
+        router.push('/dashboard/buku');
+      }, 3000);
     } catch (error) {
-      console.error('Gagal menambahkan buku:', error.message);
       setErrorMessage(error.message);
     }
-    console.log('Image Path:', imagePath);
   };
 
   return (

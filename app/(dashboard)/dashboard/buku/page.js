@@ -1,4 +1,3 @@
-import Sidebar from '@/components/dashboard/sidebar';
 import BukuBaru from '@/components/dashboard/buku/baru';
 import KoleksiBuku from '@/components/dashboard/buku/koleksi';
 

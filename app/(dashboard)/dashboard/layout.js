@@ -1,4 +1,3 @@
-// components/Layout.js
 import Sidebar from '@/components/dashboard/sidebar';
 
 const Layout = ({ children }) => {
@@ -7,7 +6,7 @@ const Layout = ({ children }) => {
       {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Content */}
+      {/* Konten Utama */}
       <main className="flex-1 p-6">{children}</main>
     </div>
   );

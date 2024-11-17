@@ -1,12 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function BukuBaru() {
   const [buku, setBuku] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [bookToDelete, setBookToDelete] = useState(null);
+  const router = useRouter();
   const itemsPerPage = 4;
 
   useEffect(() => {
@@ -18,19 +22,25 @@ export default function BukuBaru() {
       });
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async () => {
+    if (!bookToDelete) return;
     try {
-      const response = await fetch(`/api/buku?id=${id}`, { method: 'DELETE' });
+      const response = await fetch(`/api/buku?id=${bookToDelete}`, { method: 'DELETE' });
       if (!response.ok) {
         throw new Error('Gagal menghapus buku');
       }
       alert('Buku berhasil dihapus');
-      // Update data buku setelah penghapusan
-      setBuku(buku.filter((b) => b.id !== id));
+      setShowConfirmPopup(false);
+      setBuku(buku.filter((b) => b.id !== bookToDelete));
+      setBookToDelete(null);
     } catch (error) {
       console.error('Error saat menghapus buku:', error);
       alert('Terjadi kesalahan saat menghapus buku');
     }
+  };
+
+  const handleUpdate = (id) => {
+    router.push(`/dashboard/buku/update-buku?id=${id}`);
   };
 
   const handleNext = () => {
@@ -75,7 +85,7 @@ export default function BukuBaru() {
             </svg>
           </button>
 
-          {/* Carousel Content */}
+          {/* Carousel Konten */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {visibleBooks.map((b) => (
               <div key={b.id} className="flex flex-col items-center rounded-lg shadow-xl p-4 border-2 hover:shadow-md hover:shadow-secondary">
@@ -89,10 +99,14 @@ export default function BukuBaru() {
                   <p className="text-gray-500">Ketersediaan : {b.stok}</p>
                 </div>
                 <div className="mt-8 flex justify-center space-x-8">
-                  <i onClick={() => handleDelete(b.id)} className="ri-delete-bin-line text-2xl text-slate hover:text-secondary"></i>
-                  <Link href="#">
-                    <i className="ri-edit-line text-2xl text-slate hover:text-secondary"></i>
-                  </Link>
+                  <i
+                    onClick={() => {
+                      setBookToDelete(b.id);
+                      setShowConfirmPopup(true);
+                    }}
+                    className="ri-delete-bin-line text-2xl text-slate hover:text-secondary cursor-pointer"
+                  ></i>
+                  <i onClick={() => handleUpdate(b.id)} className="ri-edit-line text-2xl text-slate hover:text-secondary cursor-pointer"></i>
                 </div>
               </div>
             ))}
@@ -110,6 +124,30 @@ export default function BukuBaru() {
           </button>
         </div>
       </div>
+
+      {/* Popup Konfirmasi Hapus */}
+      {showConfirmPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+            <h3 className="text-lg font-semibold mb-4">Konfirmasi Penghapusan</h3>
+            <p>Apakah Anda yakin ingin menghapus buku ini?</p>
+            <div className="mt-4 flex justify-between">
+              <button
+                onClick={() => {
+                  setShowConfirmPopup(false);
+                  setBookToDelete(null);
+                }}
+                className="bg-gray-200 text-slate px-4 py-2 rounded-lg"
+              >
+                Tidak
+              </button>
+              <button onClick={handleDelete} className="bg-red-700 text-white px-4 py-2 rounded-lg">
+                Ya, Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
