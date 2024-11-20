@@ -1,6 +1,5 @@
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Link from 'next/link';
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
