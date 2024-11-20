@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 
+// Menampilkan data buku
 export async function GET(request) {
   try {
     const buku = await prisma.buku.findMany();
@@ -15,6 +16,7 @@ export async function GET(request) {
   }
 }
 
+// Menghapus data buku
 export async function DELETE(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -27,7 +29,6 @@ export async function DELETE(request) {
       });
     }
 
-    // Menghapus buku berdasarkan ID
     await prisma.buku.delete({
       where: { id: parseInt(id) },
     });
@@ -44,12 +45,11 @@ export async function DELETE(request) {
   }
 }
 
+// Menambahkan data buku
 export async function POST(request) {
   try {
     const data = await request.json();
     const { judul, penulis, penerbit, tahunTerbit, kategori, stok, imagePath } = data;
-
-    console.log('Data yang diterima:', { judul, penulis, penerbit, tahunTerbit, kategori, stok, imagePath });
 
     if (!judul || !penulis || !penerbit || !tahunTerbit || !kategori || stok == null || !imagePath) {
       return new Response(JSON.stringify({ error: 'Semua field harus diisi' }), {
@@ -58,7 +58,6 @@ export async function POST(request) {
       });
     }
 
-    // Coba lakukan insert dan lihat hasilnya
     const buku = await prisma.buku.create({
       data: {
         judul,
@@ -76,7 +75,7 @@ export async function POST(request) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error saat menambahkan buku:', error); // Periksa detail error dari Prisma
+    console.error('Error saat menambahkan buku:', error);
     return new Response(JSON.stringify({ error: 'Gagal menambahkan buku', details: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },

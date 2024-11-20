@@ -39,6 +39,7 @@ model Pustakawan {
   id         Int      @id @default(autoincrement())
   nama       String
   email      String   @unique
+  noHp       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }

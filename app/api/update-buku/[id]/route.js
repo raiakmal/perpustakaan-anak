@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-// Menangani permintaan GET untuk mengambil data buku berdasarkan ID
+// Mendapatkan ID buku dan mengembalikan data buku berdasarkan ID
 export async function GET(req, { params }) {
   const { id } = params;
 
-  console.log('Memulai request untuk mengambil data buku'); // Log awal
-  console.log('ID parameter yang diterima:', id); // Log ID
-
   if (!id) {
-    console.log('ID buku tidak disertakan dalam permintaan'); // Log error
     return NextResponse.json({ error: 'ID buku tidak disertakan dalam permintaan' }, { status: 400 });
   }
 
@@ -18,21 +14,18 @@ export async function GET(req, { params }) {
       where: { id: parseInt(id, 10) },
     });
 
-    console.log('Data buku yang ditemukan:', buku); // Log hasil query
-
     if (!buku) {
-      console.log('Buku tidak ditemukan untuk ID:', id);
       return NextResponse.json({ error: 'Buku tidak ditemukan' }, { status: 404 });
     }
 
     return NextResponse.json(buku, { status: 200 });
   } catch (error) {
-    console.error('Gagal mengambil data buku:', error); // Log error lebih spesifik
+    console.error('Gagal mengambil data buku:', error);
     return NextResponse.json({ error: 'Gagal mengambil data buku' }, { status: 500 });
   }
 }
 
-// Menangani permintaan PUT untuk memperbarui data buku berdasarkan ID
+// Update data buku berdasarkan ID
 export async function PUT(req, { params }) {
   const { id } = params;
 
