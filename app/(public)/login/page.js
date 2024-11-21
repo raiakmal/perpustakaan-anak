@@ -22,23 +22,37 @@ export default function Login() {
       });
 
       if (!response.ok) {
+        // Parsing response error to get more detail
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Invalid credentials');
+        setError(errorData.message || 'Invalid credentials');
+        return; // Stop execution if login fails
       }
 
       const { token } = await response.json();
-      document.cookie = `authToken=${token}; path=/; secure; httpOnly; samesite=lax;`;
 
+      if (!token) {
+        setError('Token not received');
+        return;
+      }
+
+      // Store the JWT in cookies with HttpOnly flag for security
+      document.cookie = `authToken=${token}; path=/; secure; HttpOnly; samesite=lax;`;
+
+      // Decode JWT to get the user role and redirect accordingly
       const decoded = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
       const role = decoded.role;
 
+      // Route based on role
       if (role === 'admin') {
         router.push('/dashboard');
       } else if (role === 'user') {
         router.push('/user');
+      } else {
+        setError('Invalid user role');
       }
     } catch (err) {
-      setError(err.message);
+      console.error('Login error:', err);
+      setError('An unexpected error occurred');
     }
   };
 
