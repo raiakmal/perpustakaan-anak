@@ -1,56 +1,48 @@
 import { NextResponse } from 'next/server';
-import { JwksClient } from 'jwks-rsa';
-import jwt from 'jsonwebtoken';
+import { authMiddleware, getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
-// Buat instance JWKS Client
-const jwksClient = new JwksClient({
-  jwksUri: process.env.KINDE_PUBLIC_KEY_URL, // URL JWKS
-});
-
-// Fungsi untuk mendapatkan kunci publik berdasarkan `kid`
-const getKey = async (header) => {
-  const key = await jwksClient.getSigningKey(header.kid);
-  return key.getPublicKey();
-};
-
-export async function middleware(request) {
-  const token = request.cookies.get('authToken')?.value;
-
-  if (!token) return NextResponse.redirect('/');
-
-  try {
-    const decoded = await new Promise((resolve, reject) => {
-      jwt.verify(
-        token,
-        (header, callback) => {
-          getKey(header)
-            .then((key) => callback(null, key))
-            .catch(callback);
-        },
-        { algorithms: ['RS256'] },
-        (err, decoded) => {
-          if (err) return reject(err);
-          resolve(decoded);
-        }
-      );
-    });
-
-    const role = decoded?.role;
-    const { pathname } = request.nextUrl;
-
-    if ((pathname.startsWith('/dashboard') && role !== 'admin') || (pathname.startsWith('/user') && role !== 'user')) {
-      return NextResponse.redirect('/unauthorized');
-    }
-
-    const response = NextResponse.next();
-    response.headers.set('x-user-role', role);
-    return response;
-  } catch (error) {
-    console.error('JWT verification failed:', error);
-    return NextResponse.redirect('/');
+export async function middleware(req) {
+  console.log('Middleware triggered');
+  const response = await authMiddleware(req);
+  if (!response) {
+    console.log('Auth middleware response failed, redirecting to login');
+    return NextResponse.redirect(new URL('/login', req.url));
   }
+
+  const { getUser, getAccessToken } = getKindeServerSession(req);
+  const user = await getUser();
+  const accessToken = await getAccessToken();
+  console.log('User:', user);
+  console.log('Access Token:', accessToken);
+
+  if (accessToken && accessToken.permissions) {
+    console.log('User permissions from access token:', accessToken.permissions);
+  } else {
+    console.log('User permissions not found');
+  }
+
+  if (req.nextUrl.pathname.startsWith('/dashboard')) {
+    console.log('Accessing /dashboard');
+    if (accessToken?.permissions?.includes(`${process.env.KINDE_ADMIN_KEY}`)) {
+      console.log('User has admin permission, access granted to /dashboard');
+      return NextResponse.next(); // Izinkan akses ke /dashboard
+    } else {
+      console.log('User does not have admin permission, redirecting to /');
+      return NextResponse.redirect(new URL('/', req.url)); // Redirect ke halaman utama jika tidak memiliki izin
+    }
+  }
+
+  // Redirect ke dashboard jika user berhasil login sebagai admin
+  if (req.nextUrl.pathname === '/' && accessToken?.permissions?.includes(`${process.env.KINDE_ADMIN_KEY}`)) {
+    console.log('Admin logged in, redirecting to /dashboard');
+    return NextResponse.redirect(new URL('/dashboard', req.url));
+  }
+
+  return response;
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/user/:path*'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 };

@@ -2,11 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { LoginLink } from '@kinde-oss/kinde-auth-nextjs/components';
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { LoginLink, LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const { user, isAuthenticated, getPermissions } = useKindeBrowserClient();
+
+  // Get permissions and log them
+  useEffect(() => {
+    const permissions = getPermissions();
+  }, [getPermissions]);
 
   // Handle Scroll Event
   const handleScroll = () => {
@@ -90,10 +97,23 @@ const Navbar = () => {
                       Kontak
                     </Link>
                   </li>
+                  {isAuthenticated && user?.permissions?.includes('admin') && (
+                    <li className="group">
+                      <Link href="/dashboard" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
+                        Dashboard
+                      </Link>
+                    </li>
+                  )}
                   <li className="group">
-                    <button className="font-medium text-md text-white bg-primary py-2 px-4 ml-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out">
-                      <LoginLink>Masuk</LoginLink>
-                    </button>
+                    {isAuthenticated ? (
+                      <button className="font-medium text-md text-white bg-primary py-2 px-4 ml-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out">
+                        <LogoutLink>Keluar</LogoutLink>
+                      </button>
+                    ) : (
+                      <button className="font-medium text-md text-white bg-primary py-2 px-4 ml-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out">
+                        <LoginLink>Masuk</LoginLink>
+                      </button>
+                    )}
                   </li>
                 </ul>
               </nav>
