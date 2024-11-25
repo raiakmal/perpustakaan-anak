@@ -13,7 +13,7 @@ const Kategori = ({ id }) => {
         </div>
         <div className="flex flex-wrap justify-center w-full px-4 lg:space-x-20">
           {/* Kategori 1 */}
-          <a href="/user/kategori1">
+          <a href="/kategori1">
             <div className="p-4 mb-12 transition duration-300 hover:scale-105">
               <div className="flex justify-center rounded-md shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 mb-4 text-primary">
@@ -25,7 +25,7 @@ const Kategori = ({ id }) => {
           </a>
 
           {/* Kategori 2 */}
-          <a href="/user/kategori2">
+          <a href="/kategori2">
             <div className="p-4 mb-12 transition duration-300 hover:scale-105">
               <div className="flex justify-center rounded-md shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 mb-4 text-primary">
@@ -37,7 +37,7 @@ const Kategori = ({ id }) => {
           </a>
 
           {/* Kategori 3 */}
-          <a href="/user/kategori3">
+          <a href="/kategori3">
             <div className="p-4 mb-12 transition duration-300 hover:scale-105">
               <div className="flex justify-center rounded-md shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 mb-4 text-primary">
@@ -49,7 +49,7 @@ const Kategori = ({ id }) => {
           </a>
 
           {/* Kategori 4 */}
-          <a href="/user/kategori4">
+          <a href="/kategori4">
             <div className="p-4 mb-12 transition duration-300 hover:scale-105">
               <div className="flex justify-center rounded-md shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-32 h-32 mb-4 text-primary">

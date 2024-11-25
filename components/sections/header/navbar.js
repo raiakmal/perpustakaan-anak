@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { LoginLink, LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
@@ -10,27 +10,29 @@ const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const { user, isAuthenticated, getPermissions } = useKindeBrowserClient();
 
-  // Get permissions and log them
+  // Fetch permissions once
   useEffect(() => {
-    const permissions = getPermissions();
+    const fetchPermissions = async () => {
+      const permissions = await getPermissions();
+      console.log('Permissions:', permissions);
+    };
+    fetchPermissions();
   }, [getPermissions]);
 
-  // Handle Scroll Event
-  const handleScroll = () => {
+  // Debounced scroll handler
+  const handleScroll = useCallback(() => {
     const header = document.querySelector('header');
     if (header) {
       const fixedNav = header.getBoundingClientRect().top;
       setIsFixed(window.pageYOffset > fixedNav);
     }
-  };
+  }, []);
 
-  // Add scroll event listener
+  // Add and remove scroll event listener
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   // Smooth Scrolling
   const handleSmoothScroll = (e, targetId) => {
@@ -43,10 +45,8 @@ const Navbar = () => {
     }
   };
 
-  // Handle Hamburger Menu Toggle
-  const handleToggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // Toggle Menu
+  const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
     <div>
@@ -60,7 +60,15 @@ const Navbar = () => {
             </div>
             <div className="flex items-center px-4">
               {/* Hamburger Button */}
-              <button id="hamburger" type="button" className={`block lg:hidden ${isMenuOpen ? 'hamburger-active' : ''}`} onClick={handleToggleMenu} aria-expanded={isMenuOpen} aria-label="Toggle navigation">
+              <button
+                id="hamburger"
+                type="button"
+                className={`block lg:hidden ${isMenuOpen ? 'hamburger-active' : ''}`}
+                onClick={handleToggleMenu}
+                aria-expanded={isMenuOpen}
+                aria-controls="nav-menu"
+                aria-label="Toggle navigation"
+              >
                 <span className={`hamburger-line ${isMenuOpen ? 'rotate-45' : ''} origin-top-left transition duration-300 ease-in-out`}></span>
                 <span className={`hamburger-line ${isMenuOpen ? 'scale-0' : ''} transition duration-300 ease-in-out`}></span>
                 <span className={`hamburger-line ${isMenuOpen ? '-rotate-45' : ''} origin-bottom-left transition duration-300 ease-in-out`}></span>
@@ -93,7 +101,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="group">
-                    <Link href="#kontak" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
+                    <Link href="/kontak" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">
                       Kontak
                     </Link>
                   </li>

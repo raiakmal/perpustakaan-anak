@@ -40,9 +40,9 @@ export default function Sidebar() {
               <i className="ri-book-open-line text-xl"></i>
               <span>Buku</span>
             </Link>
-            <Link href="/dasboard/siswa" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
-              <i className="ri-team-line text-xl"></i>
-              <span>Siswa</span>
+            <Link href="/dashboard/peminjaman" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
+              <i className="ri-git-repository-line text-xl"></i>
+              <span>Peminjaman</span>
             </Link>
             <Link href="/dashboard/pustakawan" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">
               <i className="ri-group-line text-xl"></i>

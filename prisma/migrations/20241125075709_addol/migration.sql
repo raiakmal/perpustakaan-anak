@@ -1,12 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "Buku" (
     "id" SERIAL NOT NULL,
@@ -14,8 +5,9 @@ CREATE TABLE "Buku" (
     "penulis" TEXT NOT NULL,
     "penerbit" TEXT NOT NULL,
     "tahunTerbit" INTEGER NOT NULL,
-    "isbn" TEXT NOT NULL,
+    "kategori" TEXT NOT NULL,
     "stok" INTEGER NOT NULL,
+    "imagePath" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -39,14 +31,12 @@ CREATE TABLE "Pustakawan" (
     "id" SERIAL NOT NULL,
     "nama" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "noHp" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Pustakawan_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "Buku_isbn_key" ON "Buku"("isbn");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Siswa_nomorInduk_key" ON "Siswa"("nomorInduk");

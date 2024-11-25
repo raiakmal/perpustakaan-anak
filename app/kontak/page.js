@@ -1,19 +1,16 @@
 "use client";
+
 import React from "react";
 import { useRouter } from "next/navigation";
 
 const Kontak = () => {
   const router = useRouter();
+  const backgrounds = ['bg-hero-1'];
 
   return (
     <div
       id="kontak"
-      className="relative flex flex-col items-center justify-center min-h-screen bg-center bg-cover"
-      style={{
-        backgroundImage: "url('/assets/hero/hero1.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative flex flex-col items-center justify-center min-h-screen bg-center bg-cover bg-hero-1 overflow-x-hidden"
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30"></div>
@@ -49,9 +46,9 @@ const Kontak = () => {
       </div>
 
       {/* Kontainer Utama */}
-      <div className="relative z-10 grid max-w-6xl gap-8 px-6 py-10 bg-white rounded-lg shadow-lg mt-27 md:grid-cols-2">
+      <div className="relative z-10 grid max-w-4xl gap-8 px-6 py-6 bg-white rounded-lg shadow-lg my-24 md:grid-cols-2 lg:my-32">
         {/* Informasi Kontak */}
-        <div className="flex flex-col items-start justify-center mt-0 space-y-10">
+        <div className="flex flex-col items-start justify-center space-y-10">
           {/* Alamat */}
           <div className="flex items-center space-x-4">
             <div className="relative flex items-center justify-center bg-white rounded-full shadow-lg w-14 h-14">
@@ -87,7 +84,7 @@ const Kontak = () => {
         </div>
 
         {/* Formulir Kontak */}
-        <div className="p-8 rounded-lg bg-gray-50">
+        <div className="p-6 rounded-lg bg-gray-50">
           <h3 className="mb-6 text-2xl font-semibold text-center text-gray-800">
             Kirim Pesan
           </h3>
