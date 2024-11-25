@@ -1,3 +1,9 @@
-export default function Home() {
-  return <div>Halaman User</div>;
+import LandingPage from "@/components/user/landingPage";
+export default function UserPage() {
+    return <LandingPage />;
 }
+
+
+
+
+
