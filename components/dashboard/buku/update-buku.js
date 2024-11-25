@@ -61,6 +61,37 @@ export default function UpdateBuku() {
     });
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const formDataFile = new FormData();
+    formDataFile.append('file', file);
+
+    setIsLoading(true);
+    setUploadError('');
+
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formDataFile,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Gagal mengunggah gambar');
+      }
+
+      const data = await response.json();
+      setFormData((prevData) => ({
+        ...prevData,
+        imagePath: data.url,
+      }));
+    } catch (error) {
+      setUploadError('Gagal mengunggah gambar. Silakan coba lagi.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { judul, penulis, penerbit, tahunTerbit, kategori, stok, imagePath } = formData;
