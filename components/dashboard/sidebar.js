@@ -29,7 +29,7 @@ export default function Sidebar() {
       <div className={`fixed inset-y-0 left-0 w-64 h-full bg-primary text-white z-20 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-200 md:relative md:translate-x-0 md:z-10`}>
         <div className="sticky top-0">
           <div className="flex items-center justify-center mb-10">
-            <h2 className="font-bold text-2xl mt-10">Awokwik</h2>
+            <h2 className="font-bold text-2xl mt-10">perpustakaanAnak</h2>
           </div>
           <nav className="space-y-6 p-6">
             <Link href="/dashboard" className="flex items-center space-x-2 text-lg p-2 rounded-lg hover:bg-secondary transition-colors duration-300 ease-in-out">

@@ -55,7 +55,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between relative">
             <div className="px-4">
               <Link href="/" className="font-bold text-lg text-primary block py-6">
-                Awokwik
+                perpustakaanAnak
               </Link>
             </div>
             <div className="flex items-center px-4">

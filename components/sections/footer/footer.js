@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container">
         <div className="flex flex-wrap">
           <div className="w-full px-4 mb-8 text-stone-400 md:w-1/3">
-            <h2 className="font-bold text-3xl text-white mb-4">Awokwik</h2>
+            <h2 className="font-bold text-3xl text-white mb-4">perpustakaanAnak</h2>
             <h3 className="font-semibold text-xl mb-2">Hubungi Kami</h3>
             <p>call.center@awokwik.com</p>
             <p>Jl. Jalan Yuk</p>
