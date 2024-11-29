@@ -146,8 +146,9 @@ export default function UpdateBuku() {
       <select name="kategori" value={formData.kategori} onChange={handleChange} className="w-full p-2 mb-4 border rounded-md" required>
         <option value="">Pilih Kategori</option>
         <option value="Edukasi">Edukasi</option>
-        <option value="Fiksi">Fiksi</option>
-        <option value="Non-Fiksi">Non-Fiksi</option>
+        <option value="Fiksi">FIksi</option>
+        <option value="Cerita">Cerita</option>
+        <option value="Sejarah">Sejarah</option>
       </select>
       <input type="number" name="stok" placeholder="Stok" value={formData.stok} onChange={handleChange} className="w-full p-2 mb-4 border rounded-md" required />
       <input type="file" name="gambar" onChange={(e) => handleFileChange(e)} className="w-full p-2 mb-4 border rounded-md" />

@@ -22,10 +22,10 @@ const Hero = () => {
 
         {/* Konten */}
         <div className="relative z-10 max-w-screen-lg px-4">
-          <h3 className="text-lg lg:text-xl">Selamat Datang di</h3>
-          <h1 className="font-semibold text-primary text-5xl mt-1 mb-6 lg:text-6xl">Awokwik</h1>
-          <p className="text-base mb-10 mx-auto max-w-2xl lg:text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, provident!</p>
-          <a href="#" className="font-medium text-md text-white bg-primary py-3 px-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out">
+          <h3 className="text-lg">Selamat Datang di</h3>
+          <h1 className="font-semibold text-primary text-4xl mt-1 mb-6 lg:text-5xl">Perpustakaan MI Cimerak</h1>
+          <p className="text-base mb-10 mx-auto lg:text-lg">Temukan cerita seru dan pengetahuan tanpa batas untuk anak-anak</p>
+          <a href="/kontak" className="font-medium text-md text-white bg-primary py-3 px-6 rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 transition-colors duration-300 ease-in-out">
             Hubungi Kami 😊
           </a>
         </div>

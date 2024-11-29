@@ -85,9 +85,9 @@ export default function Pustakawan() {
           </button>
 
           {/* Carousel Konten */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-40">
             {visibleLibrarian.map((p) => (
-              <div key={p.id} className="flex flex-col items-center rounded-lg shadow-xl p-4 border-2 hover:shadow-md hover:shadow-secondary">
+              <div key={p.id} className="w-60 flex flex-col items-center rounded-lg shadow-xl p-4 trasition duration-300 hover:scale-105 border hover:shadow-md hover:shadow-secondary">
                 <div className="mb-4 flex justify-center">
                   <i className="ri-user-fill text-4xl text-primary"></i>
                 </div>

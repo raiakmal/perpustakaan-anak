@@ -20,7 +20,7 @@ const Kontak = () => {
         {/* Tombol Kembali */}
         <button
           onClick={() => router.back()}
-          className="flex items-center text-white transition-colors hover:text-green-600"
+          className="flex items-center text-white transition-colors hover:text-secondary"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ const Kontak = () => {
             ></textarea>
             <button
               type="submit"
-              className="w-full py-3 text-lg font-semibold text-white transition-all bg-green-700 rounded-lg hover:bg-green-800"
+              className="w-full py-3 text-lg font-semibold text-white transition-all bg-primary rounded-lg hover:bg-secondary"
             >
               Kirim
             </button>

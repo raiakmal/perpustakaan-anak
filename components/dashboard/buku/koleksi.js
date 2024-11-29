@@ -72,30 +72,57 @@ export default function KoleksiBuku() {
 
         {/* Carousel Konten */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {visibleBooks.map((b) => (
-            <div key={b.id} className="flex flex-col items-center rounded-lg shadow-xl p-4 border-2 hover:shadow-md hover:shadow-secondary">
-              <div className="mb-4 flex justify-center">
-                <Image src={b.imagePath} alt={b.judul} width={100} height={150} className="object-cover rounded-md" layout="intrinsic" quality={80} />
-              </div>
-              <div>
-                <h3 className="font-semibold text-md text-gray-800 mb-4 truncate w-48 md:w-60">{b.judul}</h3>
-                <p className="text-gray-500">Penulis : {b.penulis}</p>
-                <p className="text-gray-500">Kategori : {b.kategori}</p>
-                <p className="text-gray-500">Ketersediaan : {b.stok}</p>
-              </div>
-              <div className="mt-8 flex justify-center space-x-8">
-                <i
-                  onClick={() => {
-                    setBookToDelete(b.id);
-                    setShowConfirmPopup(true);
-                  }}
-                  className="ri-delete-bin-line text-2xl text-slate hover:text-secondary"
-                ></i>
-                <i onClick={() => handleUpdate(b.id)} className="ri-edit-line text-2xl text-slate hover:text-secondary cursor-pointer"></i>
-              </div>
-            </div>
-          ))}
-        </div>
+  {visibleBooks.map((book) => (
+    <div
+      key={book.id}
+      className="flex flex-col items-center rounded-lg shadow-lg p-4 trasition duration-300 hover:scale-105 border hover:shadow-md hover:shadow-secondary"
+    >
+      {/* Gambar Buku */}
+      <div className="mb-4 flex justify-center">
+        <Image
+          src={book.imagePath}
+          alt={`Gambar buku ${book.judul}`}
+          width={100}
+          height={150}
+          className="object-cover rounded-md"
+          layout="intrinsic"
+          quality={80}
+        />
+      </div>
+
+      {/* Informasi Buku */}
+      <div>
+        <h3 className="font-semibold text-md text-gray-800 mb-2">
+          {book.judul}
+        </h3>
+        <p className="text-gray-500 text-sm">Penulis : {book.penulis}</p>
+        <p className="text-gray-500 text-sm">Kategori : {book.kategori}</p>
+        <p className="text-gray-500 text-sm">Stok : {book.stok}</p>
+      </div>
+
+      {/* Aksi Buku */}
+      <div className="mt-6 flex justify-center space-x-6">
+        <button
+          onClick={() => {
+            setBookToDelete(book.id);
+            setShowConfirmPopup(true);
+          }}
+          className="text-2xl text-slate hover:text-secondary transition-colors"
+          aria-label="Hapus Buku"
+        >
+          <i className="ri-delete-bin-line"></i>
+        </button>
+        <button
+          onClick={() => handleUpdate(book.id)}
+          className="text-2xl text-slate hover:text-secondary transition-colors"
+          aria-label="Edit Buku"
+        >
+          <i className="ri-edit-line"></i>
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
 
         {/* Tombol Selanjutnya */}
         <button

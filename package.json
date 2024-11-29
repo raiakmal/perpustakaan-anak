@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "studio": "prisma studio",
-    "dev:both": "concurrently \"npm run dev\" \"npm run studio\""
+    "dev:both": "concurrently \"npm run dev\" \"npm run studio\"",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.4.6",

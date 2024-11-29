@@ -1,33 +1,46 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Rekomendasi = ({ id }) => {
   const books = [
     {
       id: 1,
-      title: 'Celebrate the day of Forest',
-      image: '/assets/rekomendasi/buku1.jp',
+      title: 'Aku Anak Indonesia',
+      image: 'https://res.cloudinary.com/db88xk5t7/image/upload/v1732600596/aku-anak-indonesia_cfqdzb.jpg',
+      link: '/book/1', // Assuming the detail page URL is structured like this
     },
     {
       id: 2,
-      title: 'Green Nature Think',
-      image: '/assets/rekomendasi/buku2.jp',
+      title: 'Buku Cerita',
+      image: 'https://res.cloudinary.com/db88xk5t7/image/upload/v1732600597/buku-cerita_lmsxw3.jpg',
+      link: '/',
     },
     {
       id: 3,
-      title: 'The Beauty Of Dreams',
-      image: '/assets/rekomendasi/buku3.jp',
+      title: 'Buku Seri',
+      image: 'https://res.cloudinary.com/db88xk5t7/image/upload/v1732600596/buku-seri_l7dj4d.jpg',
+      link: '/',
     },
     {
       id: 4,
-      title: 'Camping at The Mountain',
-      image: '/assets/rekomendasi/buku4.jp',
+      title: 'Buku Tuntutan Ibadah',
+      image: 'https://res.cloudinary.com/db88xk5t7/image/upload/v1732600597/buku-tuntutan_at0h4v.jpg',
+      link: '/',
     },
     {
       id: 5,
-      title: 'Camping at The Forest',
-      image: '/assets/rekomendasi/buku5.jp',
+      title: 'Muslim Kids',
+      image: 'https://res.cloudinary.com/db88xk5t7/image/upload/v1732600597/muslim-kids_cndcau.jpg',
+      link: '/',
+    },
+    {
+      id: 6,
+      title: 'Teman Baru',
+      image: 'https://res.cloudinary.com/db88xk5t7/image/upload/v1732600596/teman-baru_oe6her.jpg',
+      link: '/',
     },
   ];
 
@@ -53,7 +66,7 @@ const Rekomendasi = ({ id }) => {
       <div className="max-w-full mx-auto text-center mb-16">
         <h4 className="font-bold uppercase text-primary text-lg mb-3">Rekomendasi</h4>
         <h2 className="font-bold text-dark text-xl mb-3 lg:text-3xl">Untuk Anda</h2>
-        <p className="text-base text-slate mx-auto max-w-xl lg:text-lg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati et perspiciatis magnam sit maxime ratione!</p>
+        <p className="text-base text-slate mx-auto max-w-xl lg:text-lg">Temukan buku seru, edukatif, dan menarik untuk anak-anak!</p>
       </div>
       <div className="flex items-center justify-center space-x-4">
         {/* Tombol Sebelumnya */}
@@ -70,9 +83,17 @@ const Rekomendasi = ({ id }) => {
         {/* Slide yang Aktif */}
         <div className="grid grid-cols-4 gap-4">
           {visibleBooks.map((book) => (
-            <div key={book.id} className="flex flex-col items-center">
-              <img src={book.image} alt={book.title} className="w-40 h-60 object-cover rounded-lg shadow-lg" />
-              <h3 className="text-sm font-semibold mt-3">{book.title}</h3>
+            <div key={book.id} className="flex flex-col items-center transition-all duration-300 hover:scale-105">
+              <Link href={book.link}>
+                <Image
+                  src={book.image}
+                  alt={book.title}
+                  width={200}
+                  height={300}
+                  className="object-cover rounded-lg shadow-lg max-h-60"
+                />
+                <h3 className="text-sm font-semibold mt-3">{book.title}</h3>
+              </Link>
             </div>
           ))}
         </div>
