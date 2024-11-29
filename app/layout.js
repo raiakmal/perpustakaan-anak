@@ -8,7 +8,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'Awokwik',
+  title: 'Perpustakaan MI Cimerak',
   description: 'Perpustakaan Anak MI Cimerak',
 };
 
