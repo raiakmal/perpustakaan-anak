@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
-export default function UpdateBuku() {
+export default function UpdateBukuComponent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const bukuId = searchParams.get('id');
@@ -157,5 +157,15 @@ export default function UpdateBuku() {
         Perbarui
       </button>
     </form>
+  );
+}
+
+import { Suspense } from 'react';
+
+export function UpdateBuku() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UpdateBukuComponent />
+    </Suspense>
   );
 }
