@@ -160,12 +160,3 @@ export default function UpdateBukuComponent() {
   );
 }
 
-import { Suspense } from 'react';
-
-export function UpdateBuku() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <UpdateBukuComponent />
-    </Suspense>
-  );
-}

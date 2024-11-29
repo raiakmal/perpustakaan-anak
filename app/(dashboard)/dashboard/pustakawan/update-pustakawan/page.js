@@ -1,9 +1,10 @@
 import UpdatePustakawan from '@/components/dashboard/pustakawan/update-pustakawan';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
-    <div>
+    <Suspense fallback={<div>Loading....</div>}>
       <UpdatePustakawan />
-    </div>
+    </Suspense>
   );
 }
