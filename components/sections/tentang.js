@@ -9,9 +9,9 @@ const Tentang = ({ id }) => {
         <div className="flex flex-wrap">
           <div className="w-full px-4 mb-10 lg:w-1/2">
             <h4 className="font-bold uppercase text-primary text-lg mb-3">Tentang Kami</h4>
-            <h2 className="font-bold text-dark text-xl mb-3 lg:text-3xl">Perpustakaan MI Cimerak?</h2>
+            <h2 className="font-bold text-dark text-xl mb-3 lg:text-3xl">Perpustakaan MI CIMERAK?</h2>
             <p className="text-base text-slate max-w-xl mb-4 lg:text-lg">
-            Selamat datang di perpustakaan MI Cimerak, tempat di mana imajinasi dan pengetahuan bertemu! Kami menawarkan koleksi buku yang penuh warna dan menyenangkan. Setiap buku yang kami sediakan bertujuan untuk menginspirasi rasa ingin tahu, memperluas wawasan, dan merangsang kreativitas. Dengan lingkungan yang ramah anak, kami memastikan pengalaman membaca yang menyenangkan, sekaligus edukatif. Ayo, ajak si kecil untuk menjelajah dunia baru, belajar, dan tumbuh bersama kami!
+            Selamat datang di perpustakaan MI CIMERAK, tempat di mana imajinasi dan pengetahuan bertemu! Kami menawarkan koleksi buku yang penuh warna dan menyenangkan. Setiap buku yang kami sediakan bertujuan untuk menginspirasi rasa ingin tahu, memperluas wawasan, dan merangsang kreativitas. Dengan lingkungan yang ramah anak, kami memastikan pengalaman membaca yang menyenangkan, sekaligus edukatif. Ayo, ajak si kecil untuk menjelajah dunia baru, belajar, dan tumbuh bersama kami!
             </p>
             <h3 className="font-semibold text-dark text-lg mb-4 lg:text-2xl pt-8">Ikuti dan Hubungi Kami</h3>
             <p className="text-base text-slate max-w-xl mb-4 lg:text-lg">Punya pertanyaan? Jangan ragu untuk menghubungi kami! Ikuti kami di media sosial untuk info terbaru, acara seru, dan rekomendasi buku menarik!</p>
